@@ -20,7 +20,7 @@ function checkForCollisions(){
       console.log("(" + pulses[i].x+ "," + pulses[i].y+ ") (" +nodes[j].x + "," + nodes[j].y+ ")")
       if (pulses[i].x == nodes[j].x && pulses[i].y == nodes[j].y){
         if(nodes[j].collide(pulses[i])){
-          notes.push(getNote(nodes[j].x + "," + nodes[j].y));
+          notes.push(getNote(nodes[j].x+","+nodes[j].y));
         }
       }
     }
@@ -32,3 +32,24 @@ function checkForCollisions(){
   //MIDI.chordOff(0,notes,delay);
 }
 var interval = setInterval(updateAll,ms);
+var on = true;
+
+$('.toolbarTool').on('click',function() {
+  if(on){
+    console.log("TURNING OFF");
+    clearInterval(interval);
+    on = false;
+    pulses = [];
+    for(var i =0 ; i < nodes.length; i++){
+      if (nodes[i].counter != undefined) nodes[i].counter = 0;
+      console.log("Setting counter to 0");
+    }
+    renderPulses(nodeContainer,hexWidth,hexHeight);
+    renderNodes(nodeContainer,hexWidth,hexHeight);
+    stage.update();
+  }else{
+    console.log("TURNING ON");
+    on = true;
+    interval = setInterval(updateAll,ms);
+  }
+})
