@@ -1,4 +1,4 @@
-$(function() {
+
 
     function resizeContainers() {
         var containerWidth = $('.container').width();
@@ -17,8 +17,8 @@ $(function() {
         resizeContainers();
     });
 
+    $(document).on('ready', function() {
+        resizeContainers();
+    });
 
 
-
-
-});
