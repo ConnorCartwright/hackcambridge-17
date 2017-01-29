@@ -5,7 +5,8 @@ var windowWidth = $(window).width();
 var windowHeight = $(window).height();
 
 var size = (windowWidth <  windowHeight) ? windowWidth : windowHeight;
-size -= 50;
+var margin = 50;
+size -= margin;
 var hexWidth = size / 10.75;
 var hexRadius = hexWidth / 2;
 var hexHeight = hexWidth * (Math.sqrt(3)/2);
@@ -104,14 +105,16 @@ Hexagon.prototype.drawShape = function()
     // this.rotation = -90;
 };
 
+function toLogicalCoords(x,y){
+  return {
+    x: x,
+    y: y - Math.ceil(x/2)
+  }
+};
 
-
-
-
-
-
-
-
-
-
-
+function toRenderCoords(x,y){
+  return {
+    x: x,
+    y: y + Math.ceil(x/2)
+  }
+};
