@@ -150,7 +150,15 @@ function playNote(note, interval) { // play the note for interval amount of time
 	});
 }
 
-function getNote(coord) {
+function getKey(coord) { //Gets the note from the associated coordinate in Human readable format (A0, A#0...)
+	return map[coord]; 
+}
+
+function getNote(coord) { //Gets the note from the associated coordinate in MIDI readable format (1, 2, 3...)
+	return keysToNote[map[coord]];
+}
+
+function playHex(coord) { //Plays the note of the associated hexagon coordinate
 	playNote(map[coord], definterval);
 }
 
