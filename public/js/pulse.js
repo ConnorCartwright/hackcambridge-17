@@ -10,16 +10,17 @@ function update(){
 }
 
 function renderPulses(container,canvasWidth,canvasHeight,hexWidth,hexHeight){
-  container.children = [];
-  for(var i = 0; i < pulses.length){
+//  container.children = [];
+  for(var i = 0; i < pulses.length;i++){
     var pulse = pulses[i]; 
     rndrX = pulse.getRenderX();
     rndrY = pulse.getRenderY();
+    var yOffset = ((rndrX +1) % 2) * (hexHeight/2);
     absX = hexWidth * (rndrX * 0.75) + 0.5 * hexWidth;
-    absY = (hexHeight * rndrY) + (((hexWidth + 1) % 2) * 0.5 * hexHeight) + (0.5 * hexHeight);
+    absY = 1 + hexHeight * rndrY + yOffset + (0.5 * hexHeight);
     var shape = new createjs.Shape(); 
     shape.graphics.beginFill(pulseColour)
-      .drawPolyStar(0,0,hexWidth/2, 6,0,0);
+      .drawPolyStar(0,0,hexWidth/2, 6,0,0)
       .endFill();
     shape.x = absX;
     shape.y = absY;
@@ -36,7 +37,7 @@ function makePulse(x,y,updateVector){
     this.x += updateVector.x;
     this.y += updateVector.y;
     this.lifespan--;
-    if(lifespan <= 0) this.destroy();
+    if(this.lifespan <= 0) this.destroy();
   }
   this.destroy = function(){
     pulses.remove(this);
@@ -50,5 +51,7 @@ function makePulse(x,y,updateVector){
   pulses.push(this);
   return this
 }
+
+
 
 var timer = setInterval(period,update);
