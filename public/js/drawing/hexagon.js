@@ -1,6 +1,9 @@
 var hexWidth;
 var stage, dist, rayon, texture, hexagons = [], hexagon;
 var hexHeight;
+var nodeContainer, hexContainer;
+
+
 function generateHexGrid() {
 
     $('.hexContainer')
@@ -29,7 +32,19 @@ function generateHexGrid() {
     stage.canvas.height = height;
     stage.canvas.width = size;
 
+    hexContainer = new createjs.Container();
+    stage.addChild(hexContainer);
+    hexContainer.x = 0;
+    hexContainer.y = 0;
+    hexContainer.height = height;
+    hexContainer.width = size;
 
+    nodeContainer = new createjs.Container();
+    stage.addChild(nodeContainer);
+    nodeContainer.x = 0;
+    nodeContainer.y = 0;
+    nodeContainer.height = height;
+    nodeContainer.width = size;
 
     console.log('Initialised radius as: ' + hexRadius);
 
@@ -66,11 +81,11 @@ function generateHexGrid() {
                     console.log(lCoords.y);
                     var hn = new HexNode(lCoords.x, lCoords.y, 'u',nodeId,1);
                     nodes.push(hn);
-                    renderNodes(stage,hexWidth,hexHeight);
+                    renderNodes(nodeContainer,hexWidth,hexHeight);
                     stage.update();
                   });
                   hexagons.push(hexagon);
-                  stage.addChild(hexagon);
+                  hexContainer.addChild(hexagon);
                 }(hexagon));
                 // hexStartY += hexHeight;
             }
