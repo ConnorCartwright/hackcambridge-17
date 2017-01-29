@@ -52,7 +52,7 @@ var keysToNote = {
     'D5':62,
     'D#5':63,
     'E5':64,
-    'F5':65
+    'F5':65,
 	'F#1':66,
     'G1':67,
     'G#1':68,
@@ -128,7 +128,7 @@ var mapCoordsToMidi = function(startingX, startingY) {
 };
 
 
-function playNote(note) {
+function playNote(note, extdelay) {
     note = keysToNote[note];
     MIDI.loadPlugin({
 		soundfontUrl: "js/MIDI.js-master/examples/soundfont/",
@@ -142,6 +142,7 @@ function playNote(note) {
 			// play the note
 			MIDI.setVolume(0, 127);
 			MIDI.noteOn(0, note, velocity, delay);
+			MIDI.noteOff(0, note, delay+extdelay);
 		}
 	});
 }
