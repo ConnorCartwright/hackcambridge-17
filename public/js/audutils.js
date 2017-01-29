@@ -8,65 +8,6 @@ var allPossibleKeys = [  //range from from A#1 to F6
 	'C6', 'C#6', 'D6', 'D#6', 'E6', 'F6' //Highest notes
 ];
 
-var keysToNote = {
-    'A#1':22,
-    'B1':23,
-	'C2':24,
-    'C#2':25,
-    'D2':26,
-    'D#2':27,
-    'E2':28,
-    'F2':29,
-    'F#2':30,
-    'G2':31,
-    'G#2':32,
-    'A2':33,
-    'A#2':34,
-    'B2':35,
-	'C3':36,
-    'C#3':37,
-    'D3':38,
-    'D#3':39,
-    'E3':40,
-    'F3':41,
-    'F#3':42,
-    'G3':43,
-    'G#3':44,
-    'A3':45,
-    'A#3':46,
-    'B3':47,
-	'C4':48,
-    'C#4':49,
-    'D4':50,
-    'D#4':51,
-    'E4':52,
-    'F4':53,
-    'F#4':54,
-    'G4':55,
-    'G#4':56,
-    'A4':57,
-    'A#4':58,
-    'B4':59,
-	'C5':60,
-    'C#5':61,
-    'D5':62,
-    'D#5':63,
-    'E5':64,
-    'F5':65,
-	'F#1':66,
-    'G1':67,
-    'G#1':68,
-    'A1':69,
-	'A#0':70,
-    'B0':71,
-    'C1':72,
-    'C#1':73,
-    'D1':74,
-    'D#1':75,
-    'E1':76,
-    'F1':77,
-}
-
 var mapCoordsToMidi = function(startingX, startingY) {
     var startingIndex = 45; // we start from G4
     var currIndex = startingIndex; //maps the current index
@@ -128,8 +69,8 @@ var mapCoordsToMidi = function(startingX, startingY) {
 };
 
 
-function playNote(note, interval) { // play the note for interval amount of time
-    note = keysToNote[note];
+function playNote(key, interval) { // play the note for interval amount of time
+    note = MIDI.keyToNote[key];
     MIDI.loadPlugin({
 		soundfontUrl: "js/MIDI.js-master/examples/soundfont/",
 		instrument: "acoustic_grand_piano",
