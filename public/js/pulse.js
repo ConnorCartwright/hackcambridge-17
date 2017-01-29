@@ -1,7 +1,7 @@
 var bpm = 120;
 var period = 60000 / bpm;
 var pulses = [];
-var pulseColour = "#39FF1480"
+var pulseColour = "rgba(100, 255, 100, 0.7)";
 
 function update(){
   for(var i = 0; i < pulses.length; i++){
