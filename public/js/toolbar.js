@@ -37,7 +37,7 @@ var debugCodeThatHardCodesAndAddToDB = function(thisClass, currTime, nodetype) {
     if($(thisClass).hasClass("startNode")) {
         var json_created = {
             "creator" : "Gwen",
-            "direction" : "UP",
+            "direction" : "U",
             "editor" : ["Gwen"],
             "pulsePerBeat" : 1,
             "time_created" : currTime,
@@ -52,7 +52,7 @@ var debugCodeThatHardCodesAndAddToDB = function(thisClass, currTime, nodetype) {
     } else if($(thisClass).hasClass("stopNode")) {
         var json_created = {
             "creator" : "Gwen",
-            "direction" : "DOWN",
+            "direction" : "D",
             "editor" : ["Gwen"],
             "pulsePerBeat" : 1,
             "time_created" : currTime,
@@ -66,7 +66,7 @@ var debugCodeThatHardCodesAndAddToDB = function(thisClass, currTime, nodetype) {
     } else if($(thisClass).hasClass("ricochetNode")) {
         var json_created = {
             "creator" : "Gwen",
-            "direction" : "UPPERLEFT",
+            "direction" : "UL",
             "editor" : ["Gwen"],
             "pulsePerBeat" : 1,
             "time_created" : currTime,
