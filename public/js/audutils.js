@@ -128,7 +128,7 @@ var mapCoordsToMidi = function(startingX, startingY) {
 };
 
 
-function playNote(note, extdelay) {
+function playNote(note, interval) { // play the note for interval amount of time
     note = keysToNote[note];
     MIDI.loadPlugin({
 		soundfontUrl: "js/MIDI.js-master/examples/soundfont/",
@@ -142,9 +142,13 @@ function playNote(note, extdelay) {
 			// play the note
 			MIDI.setVolume(0, 127);
 			MIDI.noteOn(0, note, velocity, delay);
-			MIDI.noteOff(0, note, delay+extdelay);
+			MIDI.noteOff(0, note, interval);
 		}
 	});
+}
+
+function getNote(coord) {
+	playNote(map[coord]);
 }
 
 //testing
