@@ -76,13 +76,32 @@ function generateHexGrid() {
                 (function(hexagon){ 
                   hexagon.addEventListener('click',function() {
                     console.log('tits');
-                    var nodeId = 0;
+                    var typeId = 0;
                     var lCoords = toLogicalCoords(hexagon.coordsX,hexagon.coordsY);
                     console.log(lCoords.y);
-                    var hn = new HexNode(lCoords.x, lCoords.y, 'u',nodeId,1);
-                    nodes.push(hn);
-                    renderNodes(nodeContainer,hexWidth,hexHeight);
+
+                    var addNode = true;
+
+                    for (var k = 0; k < nodes.length; k++) {
+                        if (nodes[k].x === lCoords.x && nodes[k].y === lCoords.y) {
+                            console.log('node already exists');
+                            addNode = false;
+                            // nodes.splice(k, 1);
+                            // remove node from board
+                            // nodeContainer.getChild blah blah
+                            break;
+                        }
+                    }
+
+                    if (addNode) {
+                        var hn = new HexNode(lCoords.x, lCoords.y, 'u',typeId,1, nextID++);
+                        nodes.push(hn);
+                        renderNodes(nodeContainer,hexWidth,hexHeight);
+                    }
+
                     stage.update();
+
+
                   });
                   hexagons.push(hexagon);
                   hexContainer.addChild(hexagon);

@@ -1,4 +1,5 @@
 var nodes = [];
+var nextID = 0;
 var startNodeColour = "red";
 var nodeTypes = [];
 var rotationMap = {
@@ -31,15 +32,12 @@ function renderNodes(container,hexWidth,hexHeight){
   //container.children = [];
   for(var i = 0; i < nodes.length; i++){
     var node = nodes[i];
-    console.log(node);
     rndrX = node.getRenderX();
     rndrY = node.getRenderY();
-    console.log("(" + rndrX + "," + rndrY + ")");
     yOffset = ((rndrX + 1) % 2) * (hexHeight/2);
     absX = hexWidth * (rndrX * 0.75) +  0.5* hexWidth;
     absY =  1 + hexHeight *(rndrY) + (0.5 * hexHeight) + yOffset;
     var shape = nodeTypes[node.typeId].getShape(hexWidth);
-    console.log(shape);
     shape.x = absX;
     shape.y = absY;
     shape.regX = 0;
@@ -49,13 +47,13 @@ function renderNodes(container,hexWidth,hexHeight){
   }
 }
 
-function HexNode(x,y,direction,typeId,pulsePerBeat){
+function HexNode(x,y,direction,typeId,pulsePerBeat, nodeId){
   this.x = x;
   this.y = y;
   this.direction = direction;
   this.typeId = typeId;
   this.pulsePerBeat = pulsePerBeat;
-  nodes.push(this);
+  this.name = nodeId.toString();
 }
 
 HexNode.prototype.constructor = HexNode;
