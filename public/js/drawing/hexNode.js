@@ -1,5 +1,14 @@
 var nodes = [];
 var nodeTypes = [];
+var rotationMap = {
+  u: 0,
+  ul:-60,
+  ur:60,
+  dr:120,
+  d: 180,
+  dl: -120
+}
+
 
 nodeTypes.push({
   name: "startNode",
@@ -28,6 +37,9 @@ function renderNodes(container,canvasWidth,canvasHeight,hexWidth,hexHeight){
     var shape = nodeType[node.typeId].getShape(width);
     shape.x = absX;
     shape.y = absY;
+    shape.regX = hexWidth/2;
+    shape.regY = hexHeight/2;
+    shape.rotation = rotationMap[node.direction];
     container.addChild(shape);
   }
 }
@@ -50,3 +62,4 @@ function HexNode(x,y,direction,typeId,pulsePerBeat){
   nodes.push(this);
   return this;
 }
+
