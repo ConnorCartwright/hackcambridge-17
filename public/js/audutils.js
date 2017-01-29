@@ -127,13 +127,11 @@ var mapCoordsToMidi = function(startingX, startingY) {
 
     }
     return map;
-}
+};
 
-function keyToNote(key) {
-    return keysToNote[key];
-}
 
 function playNote(note) {
+    note = keysToNote[note];
     MIDI.loadPlugin({
 		soundfontUrl: "js/MIDI.js-master/examples/soundfont/",
 		instrument: "acoustic_grand_piano",
@@ -142,7 +140,6 @@ function playNote(note) {
 		},
 		onsuccess: function() {
 			var delay = 0; // play one note every quarter second
-			var note = 50; // the MIDI note
 			var velocity = 127; // how hard the note hits
 			// play the note
 			MIDI.setVolume(0, 127);
