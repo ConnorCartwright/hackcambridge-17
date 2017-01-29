@@ -86,8 +86,10 @@ function generateHexGrid() {
                         if (nodes[k].x === lCoords.x && nodes[k].y === lCoords.y) {
                             console.log('node already exists');
                             addNode = false;
+                            // var child = nodeContainer.getChildByName(nodes[k].name);
                             // nodes.splice(k, 1);
-                            // remove node from board
+                            // nodeContainer.removeChild(child);
+                            // // remove node from board
                             // nodeContainer.getChild blah blah
                             break;
                         }
@@ -153,7 +155,7 @@ function generateHexGrid() {
         this.graphics
             // .beginBitmapFill(this.texture, 'no-repeat')
             .beginStroke(createjs.Graphics.getRGB(0,0,0))
-            .beginFill("rgba(222, 222, 222, 0.5)")
+            .beginFill("rgba(255, 255, 255, 0.8)")
             .drawPolyStar(0,0, shapeCoordinates.radius, 6, 0, 0)
             .endFill();
         // this.rotation = -90;
