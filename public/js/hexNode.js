@@ -27,7 +27,7 @@ nodeTypes.push({
   }
 });
 
-function renderNodes(container,canvasWidth,canvasHeight,hexWidth,hexHeight){
+function renderNodes(container,hexWidth,hexHeight){
   //container.children = [];
   for(var i = 0; i < nodes.length; i++){
     var node = nodes[i];
