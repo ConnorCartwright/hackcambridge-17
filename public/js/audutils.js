@@ -1,6 +1,7 @@
 //https://github.com/mudcube/MIDI.js/
 //MIDI.keyToNote = object; // A0 => 21
 
+
 var allPossibleKeys = [  //range from from A#0 to F5
 	'A#0','B0',	//Lowest notes
 	'C1', 'C#1', 'D1', 'D#1', 'E1', 'F1', 'F#1', 'G1', 'G#1', 'A1', 'A#1', 'B1',
@@ -10,66 +11,73 @@ var allPossibleKeys = [  //range from from A#0 to F5
 	'C5', 'C#5', 'D5', 'D#5', 'E5', 'F5' //Highest notes
 ];
 
-var coords = [
-	'0,0', '0,1', '0,2', '0,3', '0,4', '0,5', '0,6', 			//Column 1
-	'1,-1', '1,0', '1,1', '1,2', '1,3', '1,4', '1,5' ,'1,6', 	//Column 2
-	
-	'2,-1', '2,0', '2,1', '2,2', '2,3', '2,4', '2,5', 			//Column 3
-	'3,-2', '3,-1', '3,0', '3,1', '3,2', '3,3', '3,4' ,'3,5', 	//Column 4
-	
-	'4,-2', '4,-1', '4,0', '4,1', '4,2', '4,3', '4,4', 			//Column 5
-	'5,-3', '5,-2', '5,-1', '5,0', '5,1', '5,2', '5,3' ,'5,4', 	//Column 6
-	
-	'6,-3', '6,-2', '6,-1', '6,0', '6,1', '6,2', '6,3', 		//Column 7
-	'7,-4', '7,-3', '7,-2', '7,-1', '7,0', '7,1', '7,2' ,'7,3', //Column 8
-	
-	'8,-4', '8,-3', '8,-2', '8,-1', '8,0', '8,1', '8,2', 		//Column 9
-	'9,-5', '9,-4', '9,-3', '9,-2', '9,-1', '9,0', '9,1' ,'9,2',//Column 10
-	
-	'10,-5', '10,-4', '10,-3', '10,-2', '10,-1', '10,0', '10,1', 			//Column 11
-	'11,-6', '11,-5', '11,-4', '11,-3', '11,-2', '11,-1', '11,0' ,'11,1',   //Column 12
-	
-	'12,-6', '12,-5', '12,-4', '12,-3', '12,-2', '12,-1', '12,0', 			//Column 13
-	'13,-7', '13,-6', '13,-5', '13,-4', '13,-3', '13,-2', '13,-1' ,'13,0',  //Column 14
-];
+var startingIndex = 45; // we start from G4
+var currIndex = startingIndex; //maps the current index
+var currX = 0;
+var currY = 0;
 
-var coords = [
-	'0,0', '0,1', '0,2', '0,3', '0,4', '0,5', '0,6', 			//Column 1
-	'1,-1', '1,0', '1,1', '1,2', '1,3', '1,4', '1,5' ,'1,6', 	//Column 2
-	
-	'2,-1', '2,0', '2,1', '2,2', '2,3', '2,4', '2,5', 			//Column 3
-	'3,-2', '3,-1', '3,0', '3,1', '3,2', '3,3', '3,4' ,'3,5', 	//Column 4
-	
-	'4,-2', '4,-1', '4,0', '4,1', '4,2', '4,3', '4,4', 			//Column 5
-	'5,-3', '5,-2', '5,-1', '5,0', '5,1', '5,2', '5,3' ,'5,4', 	//Column 6
-	
-	'6,-3', '6,-2', '6,-1', '6,0', '6,1', '6,2', '6,3', 		//Column 7
-	'7,-4', '7,-3', '7,-2', '7,-1', '7,0', '7,1', '7,2' ,'7,3', //Column 8
-	
-	'8,-4', '8,-3', '8,-2', '8,-1', '8,0', '8,1', '8,2', 		//Column 9
-	'9,-5', '9,-4', '9,-3', '9,-2', '9,-1', '9,0', '9,1' ,'9,2',//Column 10
-	
-	'10,-5', '10,-4', '10,-3', '10,-2', '10,-1', '10,0', '10,1', 			//Column 11
-	'11,-6', '11,-5', '11,-4', '11,-3', '11,-2', '11,-1', '11,0' ,'11,1',   //Column 12
-	
-	'12,-6', '12,-5', '12,-4', '12,-3', '12,-2', '12,-1', '12,0', 			//Column 13
-	'13,-7', '13,-6', '13,-5', '13,-4', '13,-3', '13,-2', '13,-1' ,'13,0',  //Column 14
-];
+var maxRows = 14;
+var maxCol = 8;
 
-var coordlist = {};
 
-var keyStr=coord.x+","+coord.y;
+var map = {};
 
-var coordList[keyStr]={
-		coords: coord, 
-		key: currKey
+//go through each column
+for(var i = 0; i < maxRows; i++) {
+    var currRow = i;
+    
+    //store initial coordinates and notes
+    var prevX = currX;
+    var prevY = currY;
+    var prevIndex = currIndex;
+    
+    
+    //check if it is an even row
+    //if so, we minus 1 from column size
+    var currColIndex = maxCol;
+    if(i % 2 == 0)
+        currColIndex--;
+    
+    //go through each hexagon in column
+    for(var x = 0; x < currColIndex; x++) {
+        
+        //map note to coordinate
+        var currCoord = currX + "," + currY;
+        map[currCoord] = allPossibleKeys[currIndex];
+        
+        //move to next coordinate, and move note 7 semitones down
+        currY++;
+        currIndex -= 7;
+    }
+    
+    //check if it is an even row
+    if(i%2 == 0) {
+        //move coordinates up to the start of the next column
+        currX = prevX + 1;
+        currY = prevY - 1;
+        
+        //move note up 4 semitones
+        currIndex = prevIndex+4;
+        
+    //if it is an odd row
+    } else {
+        //move coordinates up to the start of the next column
+        currX = prevX + 1;
+        currY = prevY;
+        
+        //move note down 3 semitones
+        currIndex = prevIndex-3;
+    }
+    
 }
 
-function getNote(coord) {
-	for (var i in coordList) {
-		if(coordList[i]===coord) {
-			return coordList[i];	
-		}
-	}
-	
-}
+console.log(map);
+
+//function getNote(coord) {
+//	for (var i in coordList) {
+//		if(coordList[i]===coord) {
+//			return coordList[i];	
+//		}
+//	}
+//	
+//}
