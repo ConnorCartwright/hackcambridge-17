@@ -109,6 +109,22 @@ body, html, .container {
     background-image: url('../img/nodes/ricochet.png');
 }
 
+.toolbarTool.rotateNode {
+    background-image: url('../img/nodes/rotate.png');
+}
+
+.toolbarTool.splitNode {
+    background-image: url('../img/nodes/split.png');
+}
+
+.toolbarTool.teleportInNode {
+    background-image: url('../img/nodes/teleportIn.png');
+}
+
+.toolbarTool.teleportOutNode {
+    background-image: url('../img/nodes/teleportOut.png');
+}
+
 
 /*scrollbar*/
 #scrollbar
