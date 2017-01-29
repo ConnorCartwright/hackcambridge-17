@@ -37,7 +37,7 @@ var debugCodeThatHardCodesAndAddToDB = function(thisClass, currTime, nodetype) {
     if($(thisClass).hasClass("startNode")) {
         var json_created = {
             "creator" : "Gwen",
-            "direction" : "U",
+            "direction" : "u",
             "editor" : ["Gwen"],
             "pulsePerBeat" : 1,
             "time_created" : currTime,
@@ -52,7 +52,7 @@ var debugCodeThatHardCodesAndAddToDB = function(thisClass, currTime, nodetype) {
     } else if($(thisClass).hasClass("stopNode")) {
         var json_created = {
             "creator" : "Gwen",
-            "direction" : "D",
+            "direction" : "d",
             "editor" : ["Gwen"],
             "pulsePerBeat" : 1,
             "time_created" : currTime,
@@ -66,7 +66,7 @@ var debugCodeThatHardCodesAndAddToDB = function(thisClass, currTime, nodetype) {
     } else if($(thisClass).hasClass("ricochetNode")) {
         var json_created = {
             "creator" : "Gwen",
-            "direction" : "UL",
+            "direction" : "ul",
             "editor" : ["Gwen"],
             "pulsePerBeat" : 1,
             "time_created" : currTime,
@@ -80,7 +80,7 @@ var debugCodeThatHardCodesAndAddToDB = function(thisClass, currTime, nodetype) {
     } else if($(thisClass).hasClass("splitNode")) {
         var json_created = {
             "creator" : "Gwen",
-            "direction" : "D",
+            "direction" : "d",
             "editor" : ["Gwen"],
             "pulsePerBeat" : 1,
             "time_created" : currTime,
@@ -98,7 +98,7 @@ var debugCodeThatHardCodesAndAddToDB = function(thisClass, currTime, nodetype) {
     } else if($(thisClass).hasClass("teleportInNode")) {
         var json_created = {
             "creator" : "Gwen",
-            "direction" : "UR",
+            "direction" : "ur",
             "editor" : ["Gwen"],
             "pulsePerBeat" : 1,
             "time_created" : currTime,
@@ -113,7 +113,7 @@ var debugCodeThatHardCodesAndAddToDB = function(thisClass, currTime, nodetype) {
     } else if($(thisClass).hasClass("teleportOutNode")) {
         var json_created = {
             "creator" : "Gwen",
-            "direction" : "UR",
+            "direction" : "ur",
             "editor" : ["Gwen"],
             "pulsePerBeat" : 1,
             "time_created" : currTime,
@@ -128,7 +128,7 @@ var debugCodeThatHardCodesAndAddToDB = function(thisClass, currTime, nodetype) {
     } else if($(thisClass).hasClass("rotateNode")) {
         var json_created = {
             "creator" : "Gwen",
-            "direction" : "U",
+            "direction" : "u",
             "editor" : ["Gwen"],
             "pulsePerBeat" : 1,
             "time_created" : currTime,
