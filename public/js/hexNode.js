@@ -10,6 +10,13 @@ var rotationMap = {
   dl: -120
 };
 
+var nodeContainer = new createjs.Container();
+stage.addChild(nodeContainer);
+nodeContainer.x = 0;
+nodeContainer.y = 0;
+nodeContainer.setBounds(0,0, height, size);
+
+
 nodeTypes.push({
   name: "startNode",
   onPulse: function(pulse){
