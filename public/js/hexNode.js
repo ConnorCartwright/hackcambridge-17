@@ -43,6 +43,7 @@ function renderNodes(container,hexWidth,hexHeight){
     shape.regX = 0;
     shape.regY = 0;
     shape.rotation = rotationMap[node.direction];
+    shape.name = node.name;
     container.addChild(shape);
   }
 }
