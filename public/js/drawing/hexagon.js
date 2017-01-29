@@ -1,3 +1,6 @@
+var hexWidth;
+var stage, dist, rayon, texture, hexagons = [], hexagon;
+var hexHeight;
 function generateHexGrid() {
 
     $('.hexContainer')
@@ -6,7 +9,6 @@ function generateHexGrid() {
 
     $('.myCanvas').hide().fadeIn(2000);
 
-    var stage, dist, rayon, texture, hexagons = [], hexagon;
 
     var windowWidth = $('.hexContainer').width();
     console.log('WINDOW WIDTH: ' + windowWidth);
@@ -16,9 +18,9 @@ function generateHexGrid() {
     var size = (windowWidth <  windowHeight) ? windowWidth : windowHeight;
     var margin = 50;
     size -= margin;
-    var hexWidth = size / 10.75;
+    hexWidth = size / 10.75;
     var hexRadius = hexWidth / 2;
-    var hexHeight = hexWidth * (Math.sqrt(3)/2);
+    hexHeight = hexWidth * (Math.sqrt(3)/2);
 
     var height = hexHeight * 8 + 3;
 
@@ -55,12 +57,21 @@ function generateHexGrid() {
             }
 
             for(var j = 0; j < colLength; j++){
-                hexagon = new Hexagon(i, j, hexRadius, yOffset, loader.getResult('penguin3'), stage);
-                hexagon.addEventListener('click', function() {
-    console.log('tits');
-                });
-                hexagons.push(hexagon);
-                stage.addChild(hexagon);
+                  hexagon = new Hexagon(i, j, hexRadius, yOffset, loader.getResult('penguin3'), stage);
+                (function(hexagon){ 
+                  hexagon.addEventListener('click',function() {
+                    console.log('tits');
+                    var nodeId = 0;
+                    var lCoords = toLogicalCoords(hexagon.coordsX,hexagon.coordsY);
+                    console.log(lCoords.y);
+                    var hn = new HexNode(lCoords.x, lCoords.y, 'u',nodeId,1);
+                    nodes.push(hn);
+                    renderNodes(stage,hexWidth,hexHeight);
+                    stage.update();
+                  });
+                  hexagons.push(hexagon);
+                  stage.addChild(hexagon);
+                }(hexagon));
                 // hexStartY += hexHeight;
             }
             // hexStartX += hexWidth * 0.75;
