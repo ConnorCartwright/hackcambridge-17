@@ -1,44 +1,49 @@
 var nodes = [];
+var startNodeColour = "red";
 var nodeTypes = [];
 var rotationMap = {
-  u: 0,
+  u : 0,
   ul:-60,
   ur:60,
   dr:120,
-  d: 180,
+  d : 180,
   dl: -120
-}
-
+};
 
 nodeTypes.push({
   name: "startNode",
   onPulse: function(pulse){
-    
+    console.log(pulse);
   },
   onTick: function(){
-
-  }
+    console.log("tick");
+  },
   getShape: function(width){
-    var shape = new createjs.Shape();
-    return shape.beginFill(startNodeColour)
-      .drawPolyStar(0,0,width/2,6,0,0)
-      .endFill();
+    var graphics = new createjs.Graphics();
+    graphics.beginFill(startNodeColour)
+      .drawPolyStar(0,0,width/2,6,0,0);
+    var shape = new createjs.Shape(graphics);
+    return shape;
   }
-})
+});
 
 function renderNodes(container,canvasWidth,canvasHeight,hexWidth,hexHeight){
-  container.children = [];
+  //container.children = [];
   for(var i = 0; i < nodes.length; i++){
     var node = nodes[i];
+    console.log(node);
     rndrX = node.getRenderX();
     rndrY = node.getRenderY();
-    absX = hexWidth * (rndrX * 0.75) + (0.5 * hexWidth);
-    absY = (hexHeight * rndrY) + (((hexWidth + 1) % 2) * 0.5 * hexHeight) + (0.5 * hexHeight);
-    var shape = nodeType[node.typeId].getShape(width);
+    console.log("(" + rndrX + "," + rndrY + ")");
+    yOffset = ((rndrX + 1) % 2) * (hexHeight/2);
+    absX = hexWidth * (rndrX * 0.75) +  0.5* hexWidth;
+    absY =  1 + hexHeight *(rndrY) + (0.5 * hexHeight) + yOffset;
+    var shape = nodeTypes[node.typeId].getShape(hexWidth);
+    console.log(shape);
     shape.x = absX;
     shape.y = absY;
-    shape.regX = hexWidth/2;
-    shape.regY = hexHeight/2;
+    shape.regX = 0;
+    shape.regY = 0;
     shape.rotation = rotationMap[node.direction];
     container.addChild(shape);
   }
@@ -50,16 +55,15 @@ function HexNode(x,y,direction,typeId,pulsePerBeat){
   this.direction = direction;
   this.typeId = typeId;
   this.pulsePerBeat = pulsePerBeat;
-  this.getRenderX = function() {
-    return this.x
-  };
-  this.getRenderY = function() {
-    return this.y + Math.ceil(this.x/2);
-  }
-  this.render = function(container,height,width){
-    return 
-  }
   nodes.push(this);
-  return this;
+}
+
+HexNode.prototype.constructor = HexNode;
+HexNode.prototype.getRenderX = function() {
+  return this.x;
+}
+
+HexNode.prototype.getRenderY = function() {
+  return this.y + Math.ceil(this.x/2);
 }
 
