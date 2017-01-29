@@ -27,8 +27,8 @@ nodeTypes.push({
   }
 });
 
-function renderNodes(container,canvasWidth,canvasHeight,hexWidth,hexHeight){
-  //container.children = [];
+function renderNodes(container,hexWidth,hexHeight){
+  container.children = [];
   for(var i = 0; i < nodes.length; i++){
     var node = nodes[i];
     console.log(node);
@@ -55,7 +55,6 @@ function HexNode(x,y,direction,typeId,pulsePerBeat){
   this.direction = direction;
   this.typeId = typeId;
   this.pulsePerBeat = pulsePerBeat;
-  nodes.push(this);
 }
 
 HexNode.prototype.constructor = HexNode;

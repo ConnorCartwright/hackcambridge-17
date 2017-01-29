@@ -10,7 +10,7 @@ function update(){
 }
 
 function renderPulses(container,canvasWidth,canvasHeight,hexWidth,hexHeight){
-//  container.children = [];
+  container.children = [];
   for(var i = 0; i < pulses.length;i++){
     var pulse = pulses[i]; 
     rndrX = pulse.getRenderX();
