@@ -135,7 +135,7 @@ function keyToNote(key) {
 
 function playNote(note) {
     MIDI.loadPlugin({
-		soundfontUrl: "./MIDI.js-master/examples/soundfont/",
+		soundfontUrl: "js/MIDI.js-master/examples/soundfont/",
 		instrument: "acoustic_grand_piano",
 		onprogress: function(state, progress) {
 			console.log(state, progress);
