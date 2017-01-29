@@ -9,7 +9,7 @@ function update(){
   }
 }
 
-function renderPulses(container,canvasWidth,canvasHeight,hexWidth,hexHeight){
+function renderPulses(container,hexWidth,hexHeight){
 //  container.children = [];
   for(var i = 0; i < pulses.length;i++){
     var pulse = pulses[i]; 
