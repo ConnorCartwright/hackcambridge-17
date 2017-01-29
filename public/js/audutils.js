@@ -1,4 +1,6 @@
 
+var definterval = 0.5;
+
 var allPossibleKeys = [  //range from from A#1 to F6
 	'A#1','B1',	//Lowest notes
 	'C2', 'C#2', 'D2', 'D#2', 'E2', 'F2', 'F#2', 'G2', 'G#2', 'A2', 'A#2', 'B2',
@@ -53,18 +55,18 @@ var keysToNote = {
     'D#5':63,
     'E5':64,
     'F5':65,
-	'F#1':66,
-    'G1':67,
-    'G#1':68,
-    'A1':69,
-	'A#0':70,
-    'B0':71,
-    'C1':72,
-    'C#1':73,
-    'D1':74,
-    'D#1':75,
-    'E1':76,
-    'F1':77,
+	'F#5':66,
+    'G5':67,
+    'G#5':68,
+    'A5':69,
+	'A#5':70,
+    'B5':71,
+    'C6':72,
+    'C#6':73,
+    'D6':74,
+    'D#6':75,
+    'E6':76,
+    'F6':77,
 }
 
 var mapCoordsToMidi = function(startingX, startingY) {
@@ -127,6 +129,7 @@ var mapCoordsToMidi = function(startingX, startingY) {
     return map;
 };
 
+var map = mapCoordsToMidi(0,0);
 
 function playNote(note, interval) { // play the note for interval amount of time
     note = keysToNote[note];
@@ -148,11 +151,11 @@ function playNote(note, interval) { // play the note for interval amount of time
 }
 
 function getNote(coord) {
-	playNote(map[coord]);
+	playNote(map[coord], definterval);
 }
 
 //testing
-//var map = mapCoordsToMidi(0,0);
+
 //console.log(map["0,0"]);
 //console.log();
 //playNote(keyToNote(map["0,0"]));
