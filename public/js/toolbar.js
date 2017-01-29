@@ -7,6 +7,11 @@ $('.toolbarTool').on('click', function() {
     var nodetype = getType(this);
     console.log(nodetype);
     
+    //show description
+    var desc = getDescription(this);
+    $('.descriptionSection .descTitle').html("<h3>" + desc.title + "</h3>");
+    $('.descriptionSection .descDesc').html(desc.desc);
+    
     
     //creates a json object when a button is selected, ready to be assigned to the database
 //    var json_created = {
@@ -24,6 +29,7 @@ $('.toolbarTool').on('click', function() {
     
     //DEBUG PURPOSE
     debugCodeThatHardCodesAndAddToDB(this, currTime,nodetype);
+    
 });
 
 var debugCodeThatHardCodesAndAddToDB = function(thisClass, currTime, nodetype) {
@@ -41,8 +47,6 @@ var debugCodeThatHardCodesAndAddToDB = function(thisClass, currTime, nodetype) {
 
         currSelectedNode = json_created;
         console.log(currSelectedNode);
-        
-        
     
         addTile("6,3", json_created);
     } else if($(thisClass).hasClass("stopNode")) {
@@ -89,6 +93,23 @@ var getType = function(thisClass) {
     
     return type;
 }
+
+var getDescription = function(thisClass) {
+    desc = {title:"", desc:""};
+    if($(thisClass).hasClass("startNode")) {
+        desc.title = "Start Node";
+        desc.desc = "This node starts a pulse of sound in the chosen direction";
+    } else if($(thisClass).hasClass("stopNode")) {
+        desc.title = "Stop Node";
+        desc.desc = "This node stops all pulses that pass over the node";
+    } else if($(thisClass).hasClass("ricochetNode")) {
+        desc.title = "Ricochet Node";
+        desc.desc = "This node redirects a pulse in a chosen direction";
+    }
+    
+    return desc;
+};
+
 
 var getDateTime = function() {
     var date = new Date();
