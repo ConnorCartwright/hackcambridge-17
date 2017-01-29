@@ -37,7 +37,7 @@ var debugCodeThatHardCodesAndAddToDB = function(thisClass, currTime, nodetype) {
     if($(thisClass).hasClass("startNode")) {
         var json_created = {
             "creator" : "Gwen",
-            "direction" : "U",
+            "direction" : "u",
             "editor" : ["Gwen"],
             "pulsePerBeat" : 1,
             "time_created" : currTime,
@@ -52,7 +52,7 @@ var debugCodeThatHardCodesAndAddToDB = function(thisClass, currTime, nodetype) {
     } else if($(thisClass).hasClass("stopNode")) {
         var json_created = {
             "creator" : "Gwen",
-            "direction" : "D",
+            "direction" : "d",
             "editor" : ["Gwen"],
             "pulsePerBeat" : 1,
             "time_created" : currTime,
@@ -66,7 +66,7 @@ var debugCodeThatHardCodesAndAddToDB = function(thisClass, currTime, nodetype) {
     } else if($(thisClass).hasClass("ricochetNode")) {
         var json_created = {
             "creator" : "Gwen",
-            "direction" : "UL",
+            "direction" : "ul",
             "editor" : ["Gwen"],
             "pulsePerBeat" : 1,
             "time_created" : currTime,
@@ -77,6 +77,69 @@ var debugCodeThatHardCodesAndAddToDB = function(thisClass, currTime, nodetype) {
         currSelectedNode = json_created;
         console.log(currSelectedNode);
         addTile("6,-1", json_created);
+    } else if($(thisClass).hasClass("splitNode")) {
+        var json_created = {
+            "creator" : "Gwen",
+            "direction" : "d",
+            "editor" : ["Gwen"],
+            "pulsePerBeat" : 1,
+            "time_created" : currTime,
+            "time_edited" : currTime,
+            "type_name" : nodetype
+        };
+
+        currSelectedNode = json_created;
+        console.log(currSelectedNode);
+    
+        addTile("6,0", json_created);
+
+        currSelectedNode = json_created;
+        console.log(currSelectedNode);
+    } else if($(thisClass).hasClass("teleportInNode")) {
+        var json_created = {
+            "creator" : "Gwen",
+            "direction" : "ur",
+            "editor" : ["Gwen"],
+            "pulsePerBeat" : 1,
+            "time_created" : currTime,
+            "time_edited" : currTime,
+            "type_name" : nodetype
+        };
+
+        currSelectedNode = json_created;
+        console.log(currSelectedNode);
+    
+        addTile("6,-2", json_created);
+    } else if($(thisClass).hasClass("teleportOutNode")) {
+        var json_created = {
+            "creator" : "Gwen",
+            "direction" : "ur",
+            "editor" : ["Gwen"],
+            "pulsePerBeat" : 1,
+            "time_created" : currTime,
+            "time_edited" : currTime,
+            "type_name" : nodetype
+        };
+
+        currSelectedNode = json_created;
+        console.log(currSelectedNode);
+    
+        addTile("8,-4", json_created);
+    } else if($(thisClass).hasClass("rotateNode")) {
+        var json_created = {
+            "creator" : "Gwen",
+            "direction" : "u",
+            "editor" : ["Gwen"],
+            "pulsePerBeat" : 1,
+            "time_created" : currTime,
+            "time_edited" : currTime,
+            "type_name" : nodetype
+        };
+
+        currSelectedNode = json_created;
+        console.log(currSelectedNode);
+    
+        addTile("8,0", json_created);
     }
 }
 
@@ -88,7 +151,15 @@ var getType = function(thisClass) {
     } else if($(thisClass).hasClass("stopNode")) {
         type = "Stop";
     } else if($(thisClass).hasClass("ricochetNode")) {
-        type = "Richochet";
+        type = "Ricochet";
+    } else if($(thisClass).hasClass("splitNode")) {
+        type = "Split";
+    } else if($(thisClass).hasClass("teleportInNode")) {
+        type = "TeleportIn";
+    } else if($(thisClass).hasClass("teleportOutNode")) {
+        type = "TeleportOut";
+    } else if($(thisClass).hasClass("rotateNode")) {
+        type = "Rotate";
     }
     
     return type;
@@ -98,13 +169,25 @@ var getDescription = function(thisClass) {
     desc = {title:"", desc:""};
     if($(thisClass).hasClass("startNode")) {
         desc.title = "Start Node";
-        desc.desc = "This node starts a pulse of sound in the chosen direction";
+        desc.desc = "This node plays a note and starts a pulse of sound in the chosen direction";
     } else if($(thisClass).hasClass("stopNode")) {
         desc.title = "Stop Node";
-        desc.desc = "This node stops all pulses that pass over the node";
+        desc.desc = "This node plays a note and stops the pulse from continuing on";
     } else if($(thisClass).hasClass("ricochetNode")) {
         desc.title = "Ricochet Node";
-        desc.desc = "This node redirects a pulse in a chosen direction";
+        desc.desc = "This node redirects the pulse in a chosen direction";
+    } else if($(thisClass).hasClass("splitNode")) {
+        desc.title = "Split Node";
+        desc.desc = "This node splits node into 5 different directions";
+    } else if($(thisClass).hasClass("teleportInNode")) {
+        desc.title = "Teleport In Node";
+        desc.desc = "This node, when used with the Teleport Out node allows us to redirect the pulse from part of the map.";
+    } else if($(thisClass).hasClass("teleportOutNode")) {
+        desc.title = "Teleport Out Node";
+        desc.desc = "This node, when used with the Teleport In node redirects the pulse to any part of the map.";
+    } else if($(thisClass).hasClass("rotateNode")) {
+        desc.title = "Rotate Node";
+        desc.desc = "This node redirects the pulse to a different place everytime it is hit. The direction changes in a clockwork fashion";
     }
     
     return desc;
