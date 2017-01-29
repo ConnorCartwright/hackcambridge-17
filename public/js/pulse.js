@@ -1,7 +1,7 @@
 var bpm = 120;
 var period = 60000 / bpm;
 var pulses = [];
-var pulseColour = "#39FF1480"
+var pulseColour = "rgba(150, 255, 0, 0.4)";
 
 function update(){
   for(var i = 0; i < pulses.length; i++){
@@ -28,29 +28,47 @@ function renderPulses(container,hexWidth,hexHeight){
   }
 }
 
-function makePulse(x,y,updateVector){
-  this.x = x;
-  this.y = y;
-  this.lifespan = 8;
-  this.vector = updateVector;
-  this.update = function(){
-    this.x += updateVector.x;
-    this.y += updateVector.y;
-    this.lifespan--;
-    if(this.lifespan <= 0) this.destroy();
-  }
-  this.destroy = function(){
-    pulses.remove(this);
-  }
-  this.getRenderX = function(){
-    return this.x;
-  }
-  this.getRenderY = function(){
-    return this.y + Math.ceil(this.x/2);
-  }
-  pulses.push(this);
-  return this
+function PulseNode(x, y, direction, lifespan){
+    this.x = x;
+    this.y = y;
+    this.lifespan = 8;
+    this.direction = direction;
+
+    this.update = function(){
+        this.x += updateVector.x;
+        this.y += updateVector.y;
+        this.lifespan--;
+        if(this.lifespan <= 0) this.destroy();
+    };
+
+    this.destroy = function(){
+        pulses.remove(this);
+    };
+
+    this.getRenderX = function(){
+        return this.x;
+    };
+
+    this.getRenderY = function(){
+        return this.y + Math.ceil(this.x/2);
+    };
+
+    pulses.push(this);
+
 }
+
+HexNode.prototype.constructor = HexNode;
+HexNode.prototype.getRenderX = function() {
+    return this.x;
+}
+
+HexNode.prototype.getRenderY = function() {
+    return this.y + Math.ceil(this.x/2);
+}
+
+
+
+
 
 
 
