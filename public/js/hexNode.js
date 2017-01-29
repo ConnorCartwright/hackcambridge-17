@@ -1,6 +1,6 @@
 var nodes = [];
 var nextID = 0;
-var startNodeColour = "red";
+var startNodeColour = "rgba(60, 60, 240, 0.8)";
 var nodeTypes = [];
 var rotationMap = {
   u : 0,
