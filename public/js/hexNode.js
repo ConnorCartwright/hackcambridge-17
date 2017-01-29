@@ -10,6 +10,16 @@ var rotationMap = {
   d : 180,
   dl: -120
 };
+var directionMap = {
+    u : {x: 0, y: -1},
+    ul: {x: -1, y: 0},
+    ur: {x: 1, y: -1},
+    dr: {x: 1, y: 0},
+    d : {x: 0, y: 1},
+    dl: {x: -1, y: 1}
+};
+
+
 
 nodeTypes.push({
   name: "startNode",

@@ -3,14 +3,14 @@ var period = 60000 / bpm;
 var pulses = [];
 var pulseColour = "rgba(150, 255, 0, 0.4)";
 
-function update(){
+function updatePulses(){
   for(var i = 0; i < pulses.length; i++){
     pulses[i].update();
   }
 }
 
 function renderPulses(container,hexWidth,hexHeight){
-//  container.children = [];
+ container.children = [];
   for(var i = 0; i < pulses.length;i++){
     var pulse = pulses[i]; 
     rndrX = pulse.getRenderX();
@@ -33,10 +33,11 @@ function PulseNode(x, y, direction, lifespan){
     this.y = y;
     this.lifespan = 8;
     this.direction = direction;
+    this.vector = directionMap[direction];
 
     this.update = function(){
-        this.x += updateVector.x;
-        this.y += updateVector.y;
+        this.x += this.vector.x;
+        this.y += this.vector.y;
         this.lifespan--;
         if(this.lifespan <= 0) this.destroy();
     };
@@ -72,4 +73,4 @@ HexNode.prototype.getRenderY = function() {
 
 
 
-var timer = setInterval(period,update);
+var timer = setInterval(period,updatePulses);
