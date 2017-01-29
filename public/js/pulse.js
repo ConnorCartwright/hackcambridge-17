@@ -43,8 +43,17 @@ function PulseNode(x, y, direction, lifespan){
     };
 
     this.destroy = function(){
-        pulses.remove(this);
+      for(var i=0; i<pulses.length; i++){
+        if(pulses[i]==this){
+          pulses.splice(i,1);
+          break;
+        }
+      } 
     };
+    this.setDirection = function(direction){
+      this.direction = direction;
+      this.vector = directionMap[direction]
+    }
 
     this.getRenderX = function(){
         return this.x;
@@ -68,6 +77,10 @@ HexNode.prototype.getRenderY = function() {
 }
 
 
+function collide(node,i){
+  pulses[i].direction = node.direction;
+  return true;
+}
 
 
 

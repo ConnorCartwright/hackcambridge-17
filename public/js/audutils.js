@@ -116,7 +116,7 @@ function getKey(coord) { //Gets the note from the associated coordinate in Human
 }
 
 function getNote(coord) { //Gets the note from the associated coordinate in MIDI readable format (1, 2, 3...)
-	return keysToNote[map[coord]];
+	return MIDI.keyToNote[map[coord]];
 }
 
 function playHex(coord) { //Plays the note of the associated hexagon coordinate

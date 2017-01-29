@@ -28,6 +28,24 @@ nodeTypes.push({
   },
   onTick: function(){
     console.log("tick");
+    if(this.counter % 4 == 0){
+      console.log("Making Pulse");
+      console.log(this);
+      var dirVect = directionMap[this.direction];
+      console.log(dirVect);
+      console.log(this.x);
+      console.log(this.y);
+      var startX = this.x + dirVect.x;
+      var startY = this.y + dirVect.y;   
+      console.log(startX);
+      console.log("x: " + startX + " y: " + startY + " direction: "+ this.direction);
+      new PulseNode(startX,startY,this.direction,8);
+    }
+    this.counter++;
+    
+  },
+  init: function(){
+    this.counter = 0;
   },
   getShape: function(width){
     var graphics = new createjs.Graphics();
@@ -35,6 +53,13 @@ nodeTypes.push({
       .drawPolyStar(0,0,width/2,6,0,0);
     var shape = new createjs.Shape(graphics);
     return shape;
+  },
+  collide: function(pulse){
+    console.log(this.direction)
+    pulse.setDirection(this.direction);
+    console.log("COOLLLLLISSSION");
+    console.log(pulse);
+    return true;
   }
 });
 
@@ -58,6 +83,12 @@ function renderNodes(container,hexWidth,hexHeight){
   }
 }
 
+function updateNodes(){
+  for(var i = 0; i<nodes.length;i++){
+    nodes[i].update();
+  }
+}
+
 function HexNode(x,y,direction,typeId,pulsePerBeat, nodeId){
   this.x = x;
   this.y = y;
@@ -65,6 +96,10 @@ function HexNode(x,y,direction,typeId,pulsePerBeat, nodeId){
   this.typeId = typeId;
   this.pulsePerBeat = pulsePerBeat;
   this.name = nodeId.toString();
+  this.update = nodeTypes[typeId].onTick;
+  this.collide = nodeTypes[typeId].collide;
+  nodeTypes[typeId].init.apply(this,[]); 
+  return this;
 }
 
 HexNode.prototype.constructor = HexNode;
