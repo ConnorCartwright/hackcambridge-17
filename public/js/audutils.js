@@ -11,18 +11,6 @@ var allPossibleKeys = [  //range from from A#0 to F5
 ];
 
 var keysToNote = {
-    "A#0":10,
-    "B0":11,
-    "C1":12,
-    "C#1":13,
-    'D1':14,
-    'D#1':15,
-    'E1':16,
-    'F1':17,
-    'F#1':18,
-    'G1':19,
-    'G#1':20,
-    'A1':21,
     'A#1':22,
     'B1':23,
 	'C2':24,
@@ -67,6 +55,18 @@ var keysToNote = {
     'D#5':63,
     'E5':64,
     'F5':65
+	'F#1':66,
+    'G1':67,
+    'G#1':68,
+    'A1':69,
+	'A#0':70,
+    'B0':71,
+    'C1':72,
+    'C#1':73,
+    'D1':74,
+    'D#1':75,
+    'E1':76,
+    'F1':77,
 }
 
 var mapCoordsToMidi = function(startingX, startingY) {
