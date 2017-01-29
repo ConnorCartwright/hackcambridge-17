@@ -3,7 +3,7 @@ var config = {
 apiKey: "AIzaSyAxf5rQecxRBbXSWpucsy2alD8v2UuftFo",
 authDomain: "hexhogg.firebaseapp.com",
 databaseURL: "https://hexhogg.firebaseio.com",
-storageBucket: "hexhogg>.appspot.com"
+storageBucket: "hexhogg.appspot.com"
 };
 firebase.initializeApp(config);
 

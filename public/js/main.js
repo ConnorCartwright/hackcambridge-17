@@ -27,3 +27,5 @@ function checkForCollisions(){
   MIDI.chordOn(0,notes,velocity,0);
   MIDI.chordOff(0,notes,delay);
 }
+//global variable that tracks the current selected node, if any
+var currSelectedNode = null;

@@ -6,6 +6,9 @@
         var margin = 10;
         $('.hexContainer').width((containerWidth - toolbarWidth) - margin);
         generateHexGrid();
+        renderPulses(nodeContainer, hexWidth, hexHeight);
+        renderNodes(nodeContainer, hexWidth, hexHeight);
+        stage.update();
     }
 
 

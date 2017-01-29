@@ -13,15 +13,15 @@
     <div class="hexContainer">
         <canvas id="canvas" class="myCanvas"></canvas>
     </div>
-    <div class="toolbarContainer">
+    <div id="style-4" class="toolbarContainer ">
         <div class="logoContainer">
             <img class="logoImage" src="./img/hexhogg.png">
         </div>
         <div class="toolbarMain">
-            <h4>HH Toolbar</h4>
+            <h3>Toolbar</h3>
             <div class="toolBarSection">
                 <div class="toolbarSectionTitle">
-                    <h5>Nodes</h5>
+                    <h4>Nodes</h4>
                 </div>
                 <div class="toolbarSectionBody">
                     <div class="toolbarTool startNode">
@@ -53,6 +53,14 @@
                     </div>
                 </div>
             </div>
+            <div class="descriptionSection">
+                <div class="descTitle">
+                    &nbsp;
+                </div>
+                <div class="descDesc">
+                    &nbsp;
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -61,6 +69,7 @@
 
 
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="js/main.js"></script>
     <script src="js/resize.js"></script>
     <script src="js/toolbar.js"></script>
     <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase-app.js"></script>
@@ -68,14 +77,6 @@
     <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase-database.js"></script>
     <script src="js/firebaseInit.js"></script>
     <script src="js/firebaseCRUD.js"></script>
-    <script type="text/javascript" src="js/utils.js"></script>
-    <script>
-        var tiles = getTableData("Tiles", function(result) {
-            console.log(result);
-        });
-    </script>
-
-
     <script type="text/javascript" src="js/utils.js"></script>
     <!--<script src="js/p5.min.js"></script>-->
     <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
