@@ -1,4 +1,6 @@
 
+var definterval = 0.5;
+
 var allPossibleKeys = [  //range from from A#1 to F6
 	'A#1','B1',	//Lowest notes
 	'C2', 'C#2', 'D2', 'D#2', 'E2', 'F2', 'F#2', 'G2', 'G#2', 'A2', 'A#2', 'B2',
@@ -68,6 +70,7 @@ var mapCoordsToMidi = function(startingX, startingY) {
     return map;
 };
 
+var map = mapCoordsToMidi(0,0);
 
 function playNote(key, interval) { // play the note for interval amount of time
     note = MIDI.keyToNote[key];
@@ -88,12 +91,20 @@ function playNote(key, interval) { // play the note for interval amount of time
 	});
 }
 
-function getNote(coord) {
-	playNote(map[coord]);
+function getKey(coord) { //Gets the note from the associated coordinate in Human readable format (A0, A#0...)
+	return map[coord]; 
+}
+
+function getNote(coord) { //Gets the note from the associated coordinate in MIDI readable format (1, 2, 3...)
+	return keysToNote[map[coord]];
+}
+
+function playHex(coord) { //Plays the note of the associated hexagon coordinate
+	playNote(map[coord], definterval);
 }
 
 //testing
-//var map = mapCoordsToMidi(0,0);
+
 //console.log(map["0,0"]);
 //console.log();
 //playNote(keyToNote(map["0,0"]));
