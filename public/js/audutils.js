@@ -72,6 +72,26 @@ var mapCoordsToMidi = function(startingX, startingY) {
 
 var map = mapCoordsToMidi(0,0);
 
+function playChord(notelist, interval) { // [1, 2, 3, 4 and the like]
+	MIDI.loadPlugin({
+		soundfontUrl: "js/MIDI.js-master/examples/soundfont/",
+		instrument: "acoustic_grand_piano",
+		onprogress: function(state, progress) {
+			console.log(state, progress);
+		},
+		onsuccess: function() {
+			var delay = 0; // play one note every quarter second
+			var velocity = 127; // how hard the note hits
+			// play the note
+			MIDI.setVolume(0, 127);
+			MIDI.chordOn(0, notelist, velocity, delay);
+			MIDI.chordOff(0, notelist, interval);
+		}
+	});
+	
+	
+}
+
 function playNote(key, interval) { // play the note for interval amount of time
     note = MIDI.keyToNote[key];
     MIDI.loadPlugin({
