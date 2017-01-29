@@ -4,6 +4,12 @@ var getTableData = function(currTable, callback) {
     });
 }
 
+var getCoordValue = function(coord) {
+    firebase.database().ref('/Tiles/'+coord).once('value').then(function(snapshot) {
+      console.log(snapshot.val());
+    });
+}
+
 var onTableDataChange = function(child, callback) {
     var dbRef = firebase.database().ref().child(child);
     
