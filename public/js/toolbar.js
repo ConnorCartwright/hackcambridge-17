@@ -9,7 +9,7 @@ $('.toolbarTool').on('click', function() {
     
     //show description
     var desc = getDescription(this);
-    $('.descriptionSection .descTitle').html("<h3>" + desc.title + "</h3>");
+    $('.descriptionSection .descTitle').html("<h4>" + desc.title + "</h4>");
     $('.descriptionSection .descDesc').html(desc.desc);
     
     
