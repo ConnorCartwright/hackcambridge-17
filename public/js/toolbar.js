@@ -22,13 +22,13 @@ $('.toolbarTool').on('click', function() {
 //    currSelectedNode = json_created;
 //    console.log(currSelectedNode);
     
-    
     //DEBUG PURPOSE
-    
-    onTableDataChange("Tiles", function(){});
-    
+    debugCodeThatHardCodesAndAddToDB(this, currTime,nodetype);
+});
+
+var debugCodeThatHardCodesAndAddToDB = function(thisClass, currTime, nodetype) {
     //for ease, now when we click on a button is sets it to a predefined coordinate
-    if($(this).hasClass("startNode")) {
+    if($(thisClass).hasClass("startNode")) {
         var json_created = {
             "creator" : "Gwen",
             "direction" : "UP",
@@ -45,7 +45,7 @@ $('.toolbarTool').on('click', function() {
         
     
         addTile("6,3", json_created);
-    } else if($(this).hasClass("stopNode")) {
+    } else if($(thisClass).hasClass("stopNode")) {
         var json_created = {
             "creator" : "Gwen",
             "direction" : "DOWN",
@@ -59,7 +59,7 @@ $('.toolbarTool').on('click', function() {
         currSelectedNode = json_created;
         console.log(currSelectedNode);
         addTile("6,-3", json_created);
-    } else if($(this).hasClass("ricochetNode")) {
+    } else if($(thisClass).hasClass("ricochetNode")) {
         var json_created = {
             "creator" : "Gwen",
             "direction" : "UPPERLEFT",
@@ -74,7 +74,7 @@ $('.toolbarTool').on('click', function() {
         console.log(currSelectedNode);
         addTile("6,-1", json_created);
     }
-});
+}
 
 var getType = function(thisClass) {
     var type = "";
