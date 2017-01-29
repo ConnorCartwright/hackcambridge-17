@@ -69,8 +69,35 @@ body, html, .container {
 }
 
 .toolbarTool {
-    background: red;
+    background-size: contain;
+    background-repeat: no-repeat;
     display: inline-block;
     height: 60px;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
     width: 60px;
+}
+
+.toolbarTool:hover {
+    cursor: pointer;
+    opacity: 1;
+}
+
+.toolbarTool.active {
+    opacity: 1;
+    -webkit-box-shadow: 0px 0px 7px 0px rgba(45,155,189,1);
+    -moz-box-shadow: 0px 0px 7px 0px rgba(45,155,189,1);
+    box-shadow: 0px 0px 7px 0px rgba(45,155,189,1);
+}
+
+.toolbarTool.startNode {
+    background-image: url('../img/nodes/start.png');
+}
+
+.toolbarTool.stopNode {
+    background-image: url('../img/nodes/stop.png');
+}
+
+.toolbarTool.ricochetNode {
+    background-image: url('../img/nodes/ricochet.png');
 }
