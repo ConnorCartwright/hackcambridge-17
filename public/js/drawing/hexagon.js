@@ -1,5 +1,8 @@
 var hexWidth;
 var stage, dist, rayon, texture, hexagons = [], hexagon;
+var globalCanvasHeight;
+var globalCanvasWidth;
+stage = new createjs.Stage("canvas");
 var hexHeight;
 function generateHexGrid() {
 
@@ -15,25 +18,24 @@ function generateHexGrid() {
     var windowHeight = $('.hexContainer').height();
     console.log('WINDOW HEIGHT: ' + windowHeight);
 
-    var size = (windowWidth <  windowHeight) ? windowWidth : windowHeight;
+    globalCanvasWidth = (windowWidth <  windowHeight) ? windowWidth : windowHeight;
     var margin = 50;
-    size -= margin;
-    hexWidth = size / 10.75;
+    globalCanvasWidth -= margin;
+    hexWidth = globalCanvasWidth / 10.75;
     var hexRadius = hexWidth / 2;
     hexHeight = hexWidth * (Math.sqrt(3)/2);
 
-    var height = hexHeight * 8 + 3;
+    globalCanvasHeight = hexHeight * 8 + 3;
 
-    stage = new createjs.Stage("canvas");
     stage.enableMouseOver();
-    stage.canvas.height = height;
-    stage.canvas.width = size;
+    stage.canvas.height = globalCanvasHeight;
+    stage.canvas.width = globalCanvasWidth;
 
     var hexContainer = new createjs.Container();
     stage.addChild(hexContainer);
     hexContainer.x = 0;
     hexContainer.y = 0;
-    hexContainer.setBounds(0,0, height, size);
+    hexContainer.setBounds(0,0,  globalCanvasWidth, globalCanvasHeight);
 
     console.log('Initialised radius as: ' + hexRadius);
 

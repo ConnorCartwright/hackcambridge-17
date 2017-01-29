@@ -7,7 +7,8 @@ var pulseContainer = new createjs.Container();
 stage.addChild(pulseContainer);
 pulseContainer.x = 0;
 pulseContainer.y = 0;
-pulseContainer.setBounds(0,0, height, size);
+pulseContainer.setBounds(0,0,  globalCanvasWidth, globalCanvasHeight);
+
 
 
 function update(){

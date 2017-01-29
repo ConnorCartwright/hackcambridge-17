@@ -14,7 +14,7 @@ var nodeContainer = new createjs.Container();
 stage.addChild(nodeContainer);
 nodeContainer.x = 0;
 nodeContainer.y = 0;
-nodeContainer.setBounds(0,0, height, size);
+nodeContainer.setBounds(0,0, globalCanvasWidth, globalCanvasHeight);
 
 
 nodeTypes.push({
