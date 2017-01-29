@@ -29,7 +29,11 @@ function generateHexGrid() {
     stage.canvas.height = height;
     stage.canvas.width = size;
 
-
+    var hexContainer = new createjs.Container();
+    stage.addChild(hexContainer);
+    hexContainer.x = 0;
+    hexContainer.y = 0;
+    hexContainer.setBounds(0,0, height, size);
 
     console.log('Initialised radius as: ' + hexRadius);
 

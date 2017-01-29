@@ -1,7 +1,14 @@
 var bpm = 120;
 var period = 60000 / bpm;
 var pulses = [];
-var pulseColour = "#39FF1480"
+var pulseColour = "rgba(100, 255, 100, 0.7)";
+
+var pulseContainer = new createjs.Container();
+stage.addChild(pulseContainer);
+pulseContainer.x = 0;
+pulseContainer.y = 0;
+pulseContainer.setBounds(0,0, height, size);
+
 
 function update(){
   for(var i = 0; i < pulses.length; i++){
