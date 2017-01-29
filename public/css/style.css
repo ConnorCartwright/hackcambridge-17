@@ -3,6 +3,9 @@ body, html, .container {
     background: #333;
     display: block;
     height: 100%;
+    margin: 0 !important;
+    overflow: hidden;
+    padding: 0 !important;
     width: 100%;
 }
 
@@ -26,6 +29,9 @@ body, html, .container {
     background: #efefef;
     display: inline-block;
     height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
     width: 200px;
 }
 
@@ -39,11 +45,17 @@ body, html, .container {
 }
 
 .logoImage {
-    max-width: 100%;
+    margin-left: 6%;
+    margin-top: 16px;
+    width: 88%
 }
 
 .toolbarMain {
     text-align: center;
+}
+
+.toolbarMain>h4 {
+    margin-top: 30px;
 }
 
 .toolbarSectionTitle {
