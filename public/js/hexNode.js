@@ -1,7 +1,7 @@
 var nodes = [];
 var nextID = 0;
 var startNodeColour = "rgba(60, 60, 240, 0.8)";
-var nodeTypes = [];
+var nodeTypes = {};
 var rotationMap = {
   u : 0,
   ul:-60,
@@ -20,48 +20,70 @@ var directionMap = {
 };
 
 
+nodeTypes['start'] = {
+    name: 'start',
+    pulseNode: null,
+    onPulse: function(pulse){
+    },
+    onTick: function(){
+        console.log('THIS COUNTER: ' + this.counter);
+        if(this.counter == 0 || this.counter == 8) {
+            var dirVect = directionMap[this.direction];
+            console.log('AAAAAAA');
+            console.log(this);
+            var startX = this.x + dirVect.x;
+            var startY = this.y + dirVect.y;
+            this.pulseNode = new PulseNode(startX, startY, this.direction, 8, this);
+            if (this.counter == 8) {
+                this.counter = 0;
+            }
+        }
+        this.counter++;
 
-nodeTypes.push({
-  name: "startNode",
-  onPulse: function(pulse){
-    console.log(pulse);
-  },
-  onTick: function(){
-    console.log("tick");
-    if(this.counter % 4 == 0){
-      console.log("Making Pulse");
-      console.log(this);
-      var dirVect = directionMap[this.direction];
-      console.log(dirVect);
-      console.log(this.x);
-      console.log(this.y);
-      var startX = this.x + dirVect.x;
-      var startY = this.y + dirVect.y;   
-      console.log(startX);
-      console.log("x: " + startX + " y: " + startY + " direction: "+ this.direction);
-      new PulseNode(startX,startY,this.direction,8);
+    },
+    init: function(){
+        this.counter = 0;
+    },
+    getShape: function(width){
+        var graphics = new createjs.Graphics();
+        graphics.beginFill(startNodeColour)
+            .drawPolyStar(0,0,width/2,6,0,0);
+        var shape = new createjs.Shape(graphics);
+        return shape;
+    },
+    collide: function(pulse){
+        console.log(this.direction);
+        pulse.setDirection(this.direction);
+        console.log("COOLLLLLISSSION");
+        console.log(pulse);
+        return true;
     }
-    this.counter++;
-    
-  },
-  init: function(){
-    this.counter = 0;
-  },
-  getShape: function(width){
-    var graphics = new createjs.Graphics();
-    graphics.beginFill(startNodeColour)
-      .drawPolyStar(0,0,width/2,6,0,0);
-    var shape = new createjs.Shape(graphics);
-    return shape;
-  },
-  collide: function(pulse){
-    console.log(this.direction)
-    pulse.setDirection(this.direction);
-    console.log("COOLLLLLISSSION");
-    console.log(pulse);
-    return true;
-  }
-});
+};
+
+nodeTypes['stop'] = {
+    name: stop,
+    onPulse: function(pulse){
+    },
+    onTick: function(){
+
+    },
+    init: function(){
+        this.counter = 0;
+    },
+    getShape: function(width){
+        var graphics = new createjs.Graphics();
+        graphics.beginFill(startNodeColour)
+            .drawPolyStar(0,0,width/2,6,0,0);
+        var shape = new createjs.Shape(graphics);
+        return shape;
+    },
+    collide: function(pulse){
+      console.log('AAAH COLLIDE WITH STOP');
+        pulse.destroyPulse();
+        console.log(pulse);
+        return true;
+    }
+};
 
 function renderNodes(container,hexWidth,hexHeight){
   //container.children = [];
@@ -96,7 +118,9 @@ function HexNode(x,y,direction,typeId,pulsePerBeat, nodeId){
   this.typeId = typeId;
   this.pulsePerBeat = pulsePerBeat;
   this.name = nodeId.toString();
-  this.update = nodeTypes[typeId].onTick;
+  console.log('NEW HEX NODE, TYPEID: ' +typeId );
+    console.log('GLOBAL NODE TYPE: ' + globalNodeType);
+    this.update = nodeTypes[typeId].onTick;
   this.collide = nodeTypes[typeId].collide;
   nodeTypes[typeId].init.apply(this,[]); 
   return this;
