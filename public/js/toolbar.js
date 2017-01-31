@@ -1,4 +1,3 @@
-var globalDirection = "u";
 
 $('.toolbarTool').on('click', function() {
     $('.toolbarTool').removeClass('active');
@@ -214,6 +213,8 @@ Number.prototype.padLeft = function(base,chr){
     return len > 0? new Array(len).join(chr || '0')+this : this;
 }
 
-$('.startNode').on('click', function() {
-   globalDirection = prompt('direction?', 'u');
+$('.toolbarTool').on('click', function() {
+    globalNodeType = $(this).data('node');
 });
+
+
