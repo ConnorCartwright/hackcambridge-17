@@ -34,7 +34,7 @@ function checkForCollisions(){
 var interval = setInterval(updateAll,ms);
 var on = true;
 
-$('.toolbarTool').on('click',function() {
+$('.teleportOutNode').on('click',function() {
   if(on){
     console.log("TURNING OFF");
     clearInterval(interval);
