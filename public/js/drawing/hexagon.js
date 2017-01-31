@@ -76,7 +76,6 @@ function generateHexGrid() {
                 (function(hexagon){ 
                   hexagon.addEventListener('click',function() {
                     console.log('tits');
-                    var typeId = 0;
                     var lCoords = toLogicalCoords(hexagon.coordsX,hexagon.coordsY);
                     console.log(lCoords.y);
 
@@ -96,7 +95,14 @@ function generateHexGrid() {
                     }
 
                     if (addNode) {
-                        var hn = new HexNode(lCoords.x, lCoords.y, 'u',typeId,1, nextID++);
+
+                        var currentDirInput = $('.getDirection').val();
+
+                        if (currentDirInput.length > 0) {
+                            globalDirection = currentDirInput;
+                        }
+
+                        var hn = new HexNode(lCoords.x, lCoords.y, globalDirection, globalNodeType, 1, nextID++);
                         nodes.push(hn);
                         renderNodes(nodeContainer,hexWidth,hexHeight);
                     }
